@@ -9,6 +9,10 @@ import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { StreamsModule } from './streams/streams.module';
+import {RequestInterceptor} from './agenda/interceptor/request.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {ResponseInterceptor} from './agenda/interceptor/response.interceptor';
+import { CommentService } from './services/comment.service';
 
 @NgModule({
   declarations: [
@@ -24,8 +28,21 @@ import { StreamsModule } from './streams/streams.module';
     StreamsModule,
     VenueModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseInterceptor,
+      multi: true
+    },
+    CommentService,
+  ],
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule {
 }
