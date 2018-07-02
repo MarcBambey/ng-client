@@ -5,6 +5,7 @@
       <div>Summit 2018</div>
     </div>
   </ea-header>
+  <div> <ea-comment></ea-comment> </div>
   <mat-sidenav-container class="ea-sidenav-container">
     <mat-sidenav #sideNav [opened]="isNavigationOpened()" [mode]="getModeByScreenSize()" [fixedInViewport]="isMobile()" fixedTopGap="56">
       <ea-sidenav (navigate)="isMobile() && sideNav.close()"></ea-sidenav>

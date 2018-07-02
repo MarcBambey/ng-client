@@ -6,6 +6,7 @@ import {TimeSlotComponent} from './time-slot/time-slot.component';
 import {AgendaResolve} from './agenda.resolve';
 import {AgendaService} from './agenda.service';
 import {DayService} from './day/day.service';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   imports: [
