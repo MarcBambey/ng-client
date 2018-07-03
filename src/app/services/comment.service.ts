@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Feedback } from '../agenda/model/feedback';
 import { Event } from '../agenda/model/event';
+import { RequestOptions } from '@angular/http';
 
 @Injectable()
 export class CommentService {
@@ -33,5 +34,9 @@ export class CommentService {
     userId:feedback.userId,
   })
   }
+
+  deleteFeedback(feedback: Feedback){
+    return this.http.delete('http://localhost:5555/feedback')
+
 
 }
