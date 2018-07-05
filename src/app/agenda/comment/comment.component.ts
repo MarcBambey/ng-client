@@ -18,10 +18,10 @@ export class CommentComponent implements OnInit {
   token : string;
 
   ngOnInit() {
-    /*
+    
     let event = new Event();
     event.eventid = 118;
-    event.eventname = 'test';
+    event.eventname = 'nice event';
     this.commentService.getFeedbackForEvent(event)
     .subscribe( results =>{
       console.log(results['token']);
@@ -29,13 +29,14 @@ export class CommentComponent implements OnInit {
       this.token = results['token'];
       console.log(this.feedbacks[0].comment);
     })
-    */
+    
     let feedback: Feedback = {
       eventid: 239,
       eventname: 'nice frontend event',
       comment: 'Nice frontend comment',
       rating:  5,
       userId: 1,
+      id: 1
       
   }
 
@@ -44,7 +45,28 @@ export class CommentComponent implements OnInit {
     console.log(results);
   })
 
-  
+  /*
+  this.commentService.deleteFeedback(feedback)
+  .subscribe (results =>{
+    console.log("Feedback deleted yay");
+    console.log(results);
+  })
+  */
+  feedback.rating = 3;
+  this.commentService.updateRating(feedback)
+  .subscribe(results => {
+    console.log("Rating updated");
+    console.log (results);
+  })
+
+  feedback.comment= "Nice comment via Angular"
+  this.commentService.updateComment(feedback)
+  .subscribe(results =>{
+    console.log("Comment updated");
+    console.log(results);
+  })
   }
+
+
 
 }
