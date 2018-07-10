@@ -18,8 +18,7 @@
            [style.background]="timeSlotGridItem.bgColor"
            [style.color]="timeSlotGridItem.textColor"
            [class.break-slot]="timeSlotGridItem.timeSlot.isBreak">
-        <ea-time-slot [feedbacks]= allFeedback [timeSlot]="timeSlotGridItem.timeSlot"></ea-time-slot>
-        <ea-comment [hidden] = "timeSlotGridItem.timeSlot.isHidden" [eventid]="timeSlotGridItem.timeSlot.id"> </ea-comment>
+        <ea-time-slot [timeSlot]="timeSlotGridItem.timeSlot"></ea-time-slot>
       </div>
     </div>
   </div>

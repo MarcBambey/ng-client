@@ -1,3 +1,5 @@
+import { Feedback } from "./feedback";
+
 export class TimeSlot {
   private _id: number;
   private _name: string;
@@ -9,6 +11,15 @@ export class TimeSlot {
   private _room: string;
   private _isBreak: boolean;
   private _isHidden: boolean;
+  private _feedback: Feedback[];
+
+  get feedback():Feedback[]{
+    return this._feedback;
+  }
+
+  set feedback(value: Feedback[]){
+    this._feedback = value;
+  }
 
   get isHidden(): boolean{
     return this._isHidden;

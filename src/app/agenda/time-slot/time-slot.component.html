@@ -13,7 +13,21 @@
     </span>
     <span class ="event-detail" *ngIf="timeSlot.room" (click)="commentClick()">
       <mat-icon>speaker_notes</mat-icon>
-      <span class="icon-label">{{this.numberOfComments}} Comment(s)</span>
+      <span class="icon-label">{{this.timeSlot.feedback.length}} Comment(s)</span>
     </span>
   </p>
+  <span [hidden] = isHidden>
+    <li *ngFor="let feedback of this.timeSlot.feedback">
+      <br> Feedbackid : {{feedback.id}}
+      <br> Eventid: {{feedback.eventid}}
+      <br> Eventname: {{ feedback.eventname }}
+      <br> Comment: {{feedback.comment}}
+      <br> Created: {{feedback.createdAt}}
+      <br> Updated: {{feedback.updatedAt}}
+      <br> Userid: {{feedback.userId}}
+      <br> Rating: {{feedback.rating}}
+    
+    </li>
+
+  </span>
 </div>

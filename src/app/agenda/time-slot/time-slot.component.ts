@@ -14,27 +14,20 @@ export class TimeSlotComponent implements OnInit {
 
   @Input()
   timeSlot: TimeSlot;
-  @Input()
-  feedbacks: Feedback[];
   presenters: string;
   numberOfComments: number;
   currentEventFeedbacks: Feedback[] = [];
+  isHidden : boolean = false;
 
   constructor(@Inject(forwardRef(() => DayComponent)) private _day:DayComponent, private agendaService: AgendaService, private presenterService: PresenterService) { }
 
   ngOnInit() {
     this.presenters = this.presenterService.getDisplayablePresenters(this.agendaService.getPresenters(), this.timeSlot.presenters);
-    this.numberOfComments = 2,
-    console.log("Das übergebene Feedback: " + this.feedbacks);
-    this.feedbacks.forEach(feedback => {
-     if (this.timeSlot.id === feedback.eventid) {
-       console.log("in for each");
-       this.currentEventFeedbacks.push(feedback);
-     }
-    });
+    this.numberOfComments = 2;
+  
   }
   commentClick(){
-    this.timeSlot.isHidden= !this.timeSlot.isHidden;
+    this.isHidden= !this.isHidden;
   }
 
 }

@@ -1,8 +1,8 @@
-import {Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
-import {Day} from '../model/day';
-import {AgendaService} from '../agenda.service';
-import {Stream} from '../model/stream';
-import {DayService} from './day.service';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Day } from '../model/day';
+import { AgendaService } from '../agenda.service';
+import { Stream } from '../model/stream';
+import { DayService } from './day.service';
 import { CommentService } from '../../services/comment.service';
 import { Feedback } from '../model/feedback';
 
@@ -30,16 +30,25 @@ export class DayComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.streams = this.agendaService.getStreamsForDay(this.day);
-    this.gridTemplateColumns = '1fr '.repeat(this.streams.length);
-    this.slotsMap = this.dayService.getSlotsMap(this.day.timeSlots, this.streams);
-    this.hours = Object.keys(this.slotsMap);
+
     this.commentService.getFeedbackForEvent()
-    .subscribe( results =>{
-      this.allFeedback = results['success'];
-      console.log(this.allFeedback) 
-    })
-   
+      .subscribe(results => {
+        this.allFeedback = results['success'];
+        for (let i = 0; i < this.allFeedback.length; i++) {
+          for (let j = 0; j < this.day.timeSlots.length; j++) {
+            if (this.day.timeSlots[j].feedback === undefined) {
+              this.day.timeSlots[j].feedback = [];
+            }
+            if (this.allFeedback[i].eventid === this.day.timeSlots[j].id) {
+              this.day.timeSlots[j].feedback.push(this.allFeedback[i]);
+            }
+          }
+        }
+        this.streams = this.agendaService.getStreamsForDay(this.day);
+        this.gridTemplateColumns = '1fr '.repeat(this.streams.length);
+        this.slotsMap = this.dayService.getSlotsMap(this.day.timeSlots, this.streams);
+        this.hours = Object.keys(this.slotsMap);
+      })
   }
 
   afterDayTabChanged() {
