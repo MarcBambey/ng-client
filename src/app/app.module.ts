@@ -18,7 +18,7 @@ import { CommentComponent } from './agenda/comment/comment.component';
 @NgModule({
   declarations: [
     AppComponent,
-    CommentComponent
+    //CommentComponent
   ],
   imports: [
     HttpModule,

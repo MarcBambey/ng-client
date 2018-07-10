@@ -12,7 +12,7 @@ import { CommentComponent } from './comment/comment.component';
   imports: [
     SharedModule
   ],
-  declarations: [DayComponent, AgendaComponent, TimeSlotComponent],
+  declarations: [DayComponent, AgendaComponent, TimeSlotComponent,CommentComponent],
   providers: [AgendaResolve, AgendaService, DayService]
 })
 export class AgendaModule { }

@@ -8,6 +8,15 @@ export class TimeSlot {
   private _description: string;
   private _room: string;
   private _isBreak: boolean;
+  private _isHidden: boolean;
+
+  get isHidden(): boolean{
+    return this._isHidden;
+  }
+
+  set isHidden(value: boolean){
+    this._isHidden = value;
+  }
 
   get id(): number {
     return this._id;

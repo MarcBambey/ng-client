@@ -11,5 +11,9 @@
       <mat-icon>home</mat-icon>
       <span class="icon-label">{{timeSlot.room}}</span>
     </span>
+    <span class ="event-detail" *ngIf="timeSlot.room" (click)="commentClick()">
+      <mat-icon>speaker_notes</mat-icon>
+      <span class="icon-label">{{this.numberOfComments}} Comment(s)</span>
+    </span>
   </p>
 </div>

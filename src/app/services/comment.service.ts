@@ -12,10 +12,10 @@ export class CommentService {
 
 
 
-  getFeedbackForEvent(event: Event) {
+  getFeedbackForEvent() {
     //console.log(this.http.post<Feedback[]>('http://localhost:5555/getFeedback' + event.eventid, event.eventname));
     console.log("In CommentService");
-    return this.http.get('http://localhost:5555/api/events/' + event.eventid + '/feedbacks')
+    return this.http.get('http://localhost:5555/api/events/feedbacks')
   }
   
   postFeedback(feedback: Feedback){

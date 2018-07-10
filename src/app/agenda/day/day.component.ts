@@ -3,6 +3,8 @@ import {Day} from '../model/day';
 import {AgendaService} from '../agenda.service';
 import {Stream} from '../model/stream';
 import {DayService} from './day.service';
+import { CommentService } from '../../services/comment.service';
+import { Feedback } from '../model/feedback';
 
 @Component({
   selector: 'ea-day',
@@ -21,8 +23,10 @@ export class DayComponent implements OnInit {
   hours: string[] = [];
   slotsMap: Object = {};
   gridTemplateColumns = '1fr';
+  allFeedback: Feedback[];
+  //isHidden: boolean = false;
 
-  constructor(private agendaService: AgendaService, private dayService: DayService) {
+  constructor(private agendaService: AgendaService, private dayService: DayService, private commentService: CommentService) {
   }
 
   ngOnInit() {
@@ -30,6 +34,12 @@ export class DayComponent implements OnInit {
     this.gridTemplateColumns = '1fr '.repeat(this.streams.length);
     this.slotsMap = this.dayService.getSlotsMap(this.day.timeSlots, this.streams);
     this.hours = Object.keys(this.slotsMap);
+    this.commentService.getFeedbackForEvent()
+    .subscribe( results =>{
+      this.allFeedback = results['success'];
+      console.log(this.allFeedback) 
+    })
+   
   }
 
   afterDayTabChanged() {
@@ -53,5 +63,7 @@ export class DayComponent implements OnInit {
   resolveTextColor(bgColor: string): string {
     return this.dayService.resolveTextColor(bgColor);
   }
+
+
 
 }
