@@ -15,6 +15,10 @@ import {ResponseInterceptor} from './agenda/interceptor/response.interceptor';
 import { CommentService } from './services/comment.service';
 import { CommentComponent } from './agenda/comment/comment.component';
 
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +27,7 @@ import { CommentComponent } from './agenda/comment/comment.component';
   imports: [
     HttpModule,
     BrowserModule,
+    
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     CoreModule,
     SharedModule,
@@ -30,6 +35,7 @@ import { CommentComponent } from './agenda/comment/comment.component';
     StreamsModule,
     VenueModule,
 
+    
   ],
   providers: [
     {

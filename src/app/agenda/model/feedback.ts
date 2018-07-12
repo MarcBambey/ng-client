@@ -6,7 +6,7 @@ export interface Feedback {
     rating: number;
     eventname: string;
     id?: number;
-    userId: number;
+    userId?: number;
     updatedAt?: Date;
     createdAt?: Date;
 }

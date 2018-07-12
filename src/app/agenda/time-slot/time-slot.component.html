@@ -17,6 +17,9 @@
     </span>
   </p>
   <span [hidden] = isHidden>
+    <ea-makecomment>
+
+    </ea-makecomment>
     <li *ngFor="let feedback of this.timeSlot.feedback">
       <br> Feedbackid : {{feedback.id}}
       <br> Eventid: {{feedback.eventid}}
@@ -25,7 +28,9 @@
       <br> Created: {{feedback.createdAt}}
       <br> Updated: {{feedback.updatedAt}}
       <br> Userid: {{feedback.userId}}
-      <br> Rating: {{feedback.rating}}
+      <br> rating: {{feedback.rating}}
+      <star-rating-comp [starType]="'icon'" [staticColor]="'ok'" [size]="'big'" [readOnly]="'true'" rating="{{ feedback.rating }}"></star-rating-comp>
+
     
     </li>
 

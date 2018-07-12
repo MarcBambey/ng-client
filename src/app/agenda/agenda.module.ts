@@ -8,12 +8,20 @@ import {AgendaService} from './agenda.service';
 import {DayService} from './day/day.service';
 import { CommentComponent } from './comment/comment.component';
 import { MakecommentComponent } from './makecomment/makecomment.component';
+import {FormsModule} from '@angular/forms';
+import {StarRatingModule} from 'angular-star-rating';
+
+
 
 @NgModule({
   imports: [
-    SharedModule
+    StarRatingModule,
+    FormsModule,
+    SharedModule,
+    
+    
   ],
-  declarations: [DayComponent, AgendaComponent, TimeSlotComponent,CommentComponent, MakecommentComponent],
-  providers: [AgendaResolve, AgendaService, DayService]
+  declarations: [DayComponent, AgendaComponent, TimeSlotComponent,CommentComponent, MakecommentComponent,],
+  providers: [AgendaResolve, AgendaService, DayService,]
 })
 export class AgendaModule { }

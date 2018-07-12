@@ -17,13 +17,17 @@ export class TimeSlotComponent implements OnInit {
   presenters: string;
   numberOfComments: number;
   currentEventFeedbacks: Feedback[] = [];
-  isHidden : boolean = false;
+  isHidden : boolean = true;
 
   constructor(@Inject(forwardRef(() => DayComponent)) private _day:DayComponent, private agendaService: AgendaService, private presenterService: PresenterService) { }
 
   ngOnInit() {
     this.presenters = this.presenterService.getDisplayablePresenters(this.agendaService.getPresenters(), this.timeSlot.presenters);
-    
+    console.log("The lenght of timeSlot.feedbac: " +  this.timeSlot.feedback.length );
+    if (this.timeSlot.feedback.length === undefined){
+      console.log("The length is undefined: ")
+      this.timeSlot.feedback.length = 0;
+    }
   
   }
   commentClick(){
