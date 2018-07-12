@@ -20,7 +20,7 @@ describe('CommentService', () => {
     let event = new Event();
     event.eventname = 'test';
     event.eventid = 118;
-    service.getFeedbackForEvent(event).subscribe(eventResult => {
+    service.getFeedbackForEvent().subscribe(eventResult => {
       console.log("In result of CommentService");
       console.log("Results: " + eventResult);
     }, error => {

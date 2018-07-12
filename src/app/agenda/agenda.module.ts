@@ -7,12 +7,13 @@ import {AgendaResolve} from './agenda.resolve';
 import {AgendaService} from './agenda.service';
 import {DayService} from './day/day.service';
 import { CommentComponent } from './comment/comment.component';
+import { MakecommentComponent } from './makecomment/makecomment.component';
 
 @NgModule({
   imports: [
     SharedModule
   ],
-  declarations: [DayComponent, AgendaComponent, TimeSlotComponent,CommentComponent],
+  declarations: [DayComponent, AgendaComponent, TimeSlotComponent,CommentComponent, MakecommentComponent],
   providers: [AgendaResolve, AgendaService, DayService]
 })
 export class AgendaModule { }

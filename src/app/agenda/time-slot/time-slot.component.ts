@@ -23,7 +23,7 @@ export class TimeSlotComponent implements OnInit {
 
   ngOnInit() {
     this.presenters = this.presenterService.getDisplayablePresenters(this.agendaService.getPresenters(), this.timeSlot.presenters);
-    this.numberOfComments = 2;
+    
   
   }
   commentClick(){
