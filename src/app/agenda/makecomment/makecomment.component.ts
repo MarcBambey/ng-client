@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, forwardRef } from '@angular/core';
+import { Component, OnInit, Inject, forwardRef, Input } from '@angular/core';
 import { CommentService } from '../../services/comment.service';
 import { TimeSlotComponent } from '../time-slot/time-slot.component';
 import { Feedback } from '../model/feedback';
@@ -13,11 +13,21 @@ export class MakecommentComponent implements OnInit {
 
   constructor(@Inject(forwardRef(() => DayComponent)) private _day: DayComponent, @Inject(forwardRef(() => TimeSlotComponent)) private _timeSlot: TimeSlotComponent, private commentService: CommentService) { }
 
+  @Input()
+  public timeSlotFeedback : Feedback[];
   public comment: string = "";
   public rating: number = 0;
 
   ngOnInit() {
 
+  }
+
+  ratingChanged(event){
+    console.log("The event: " + event);
+    console.log (Object.keys(event));
+    console.log(Object.values(event));
+    this.rating = event['rating'];
+    console.log("Updated rating: " + this.rating);
   }
 
   submitClicked() {
@@ -31,7 +41,8 @@ export class MakecommentComponent implements OnInit {
     this.commentService.postFeedback(feedback)
       .subscribe(results => {
         alert("Successfully added comment");
-        this._day.initEventData(feedback);
+        
+        this.timeSlotFeedback.push(feedback);
 
       }, error => {
         alert(error.error['failed']);

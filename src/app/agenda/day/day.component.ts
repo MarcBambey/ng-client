@@ -5,11 +5,14 @@ import { Stream } from '../model/stream';
 import { DayService } from './day.service';
 import { CommentService } from '../../services/comment.service';
 import { Feedback } from '../model/feedback';
+import { User } from '../globals';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'ea-day',
   templateUrl: './day.component.html',
-  styleUrls: ['./day.component.scss']
+  styleUrls: ['./day.component.scss'],
+  providers: [User],
 })
 export class DayComponent implements OnInit {
 
@@ -26,7 +29,7 @@ export class DayComponent implements OnInit {
   allFeedback: Feedback[];
   //isHidden: boolean = false;
 
-  constructor(private agendaService: AgendaService, private dayService: DayService, private commentService: CommentService) {
+  constructor(private agendaService: AgendaService, private dayService: DayService, private commentService: CommentService, private userService: UserService, private user: User) {
   }
 
   public initEventData(feedbackData): void {
@@ -54,6 +57,11 @@ export class DayComponent implements OnInit {
       }, error => {
         this.initEventData([]);
       });
+      this.userService.getUserData()
+      .subscribe(results => {
+      console.log("userdata is: " + results['payload'].userid);
+      this.user.id = results['payload'].userid;
+      })
   }
 
   afterDayTabChanged() {

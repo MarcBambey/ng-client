@@ -1,4 +1,4 @@
 Comment: <input  type="text" [(ngModel)] ="comment" name="comment"><br>
-Rating: <input type="number" [(ngModel)] ="rating" name="rating"><br>
+<star-rating-comp [starType]="'svg'" (onRatingChange)="ratingChanged($event)" [labelPosition]="'top'" [labelVisible]="true" [labelText]="'Rating'" [staticColor]="'ok'" [size]="'large'" ></star-rating-comp>
 <input type="submit" value="Submit" (click)="submitClicked()" > <br>
 

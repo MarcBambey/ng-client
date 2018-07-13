@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {ResponseInterceptor} from './agenda/interceptor/response.interceptor';
 import { CommentService } from './services/comment.service';
 import { CommentComponent } from './agenda/comment/comment.component';
+import {UserService} from './services/user.service';
 
 
 
@@ -48,7 +49,9 @@ import { CommentComponent } from './agenda/comment/comment.component';
       useClass: ResponseInterceptor,
       multi: true
     },
+    UserService,
     CommentService,
+    
   ],
   bootstrap: [AppComponent],
   

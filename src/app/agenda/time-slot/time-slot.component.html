@@ -17,10 +17,19 @@
     </span>
   </p>
   <span [hidden] = isHidden>
-    <ea-makecomment>
+    <ea-makecomment [timeSlotFeedback] = this.timeSlot.feedback>
 
     </ea-makecomment>
     <li *ngFor="let feedback of this.timeSlot.feedback">
+      <div *ngIf = "user.id == feedback.userId; else normalDisplay">  
+        <h1> Edit your Feedback</h1>
+          <star-rating-comp [starType]="'svg'" (onRatingChange)="updateOwnRating($event,feedback)" [labelPosition]="'top'" [labelVisible]="true" [labelText]="'Rating'" rating="{{ feedback.rating }}" [staticColor]="'ok'" [size]="'large'" ></star-rating-comp>
+          <input type ="text" [(ngModel)] = "feedback.comment" (focusout) ="updateOwnComment(feedback)" >
+          <input type ="submit" (click)="update(feedback)">
+
+
+      </div>
+      <ng-template #normalDisplay>
       <br> Feedbackid : {{feedback.id}}
       <br> Eventid: {{feedback.eventid}}
       <br> Eventname: {{ feedback.eventname }}
@@ -29,8 +38,8 @@
       <br> Updated: {{feedback.updatedAt}}
       <br> Userid: {{feedback.userId}}
       <br> rating: {{feedback.rating}}
-      <star-rating-comp [starType]="'icon'" [staticColor]="'ok'" [size]="'big'" [readOnly]="'true'" rating="{{ feedback.rating }}"></star-rating-comp>
-
+      <star-rating-comp [starType]="'svg'" [staticColor]="'ok'" [size]="'large'" [readOnly]="'true'"  rating="{{ feedback.rating }}"></star-rating-comp>
+    </ng-template>  
     
     </li>
 
