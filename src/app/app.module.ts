@@ -15,6 +15,9 @@ import {ResponseInterceptor} from './agenda/interceptor/response.interceptor';
 import { CommentService } from './services/comment.service';
 import { CommentComponent } from './agenda/comment/comment.component';
 import {UserService} from './services/user.service';
+import { AlertService } from './services/alert.service';
+import { AlertBoxComponent } from './agenda/alert-box/alert-box.component';
+
 
 
 
@@ -23,6 +26,7 @@ import {UserService} from './services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
+    AlertBoxComponent,
     //CommentComponent
   ],
   imports: [
@@ -35,6 +39,7 @@ import {UserService} from './services/user.service';
     AgendaModule,
     StreamsModule,
     VenueModule,
+    
 
     
   ],
@@ -51,6 +56,7 @@ import {UserService} from './services/user.service';
     },
     UserService,
     CommentService,
+    AlertService,
     
   ],
   bootstrap: [AppComponent],

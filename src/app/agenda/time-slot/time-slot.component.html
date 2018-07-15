@@ -20,28 +20,23 @@
     <ea-makecomment [timeSlotFeedback] = this.timeSlot.feedback>
 
     </ea-makecomment>
-    <li *ngFor="let feedback of this.timeSlot.feedback">
-      <div *ngIf = "user.id == feedback.userId; else normalDisplay">  
-        <h1> Edit your Feedback</h1>
+    <div class="singleComment" *ngFor="let feedback of this.timeSlot.feedback">
+      <div  *ngIf = "user.id == feedback.userId; else normalDisplay">  
           <star-rating-comp [starType]="'svg'" (onRatingChange)="updateOwnRating($event,feedback)" [labelPosition]="'top'" [labelVisible]="true" [labelText]="'Rating'" rating="{{ feedback.rating }}" [staticColor]="'ok'" [size]="'large'" ></star-rating-comp>
-          <input type ="text" [(ngModel)] = "feedback.comment" (focusout) ="updateOwnComment(feedback)" >
-          <input type ="submit" (click)="update(feedback)">
-
-
+          <div class ="center"><textarea autosize [minRows]="1" [maxRows]="15" rows="1" cols="50" [(ngModel)] = "feedback.comment"  ></textarea>
+          <br> <input class="capbutton" type ="submit" name="Update Feedback" value="Update Feedback" (click)="update(feedback)"> 
+         <br> <button class="capdelete" (click) = "deleteFeedback(feedback)" >Delete </button>
+        </div>
       </div>
+
       <ng-template #normalDisplay>
-      <br> Feedbackid : {{feedback.id}}
-      <br> Eventid: {{feedback.eventid}}
-      <br> Eventname: {{ feedback.eventname }}
-      <br> Comment: {{feedback.comment}}
-      <br> Created: {{feedback.createdAt}}
-      <br> Updated: {{feedback.updatedAt}}
-      <br> Userid: {{feedback.userId}}
-      <br> rating: {{feedback.rating}}
-      <star-rating-comp [starType]="'svg'" [staticColor]="'ok'" [size]="'large'" [readOnly]="'true'"  rating="{{ feedback.rating }}"></star-rating-comp>
+          <star-rating-comp [starType]="'svg'" [staticColor]="'ok'" [size]="'large'" [readOnly]="'true'" [labelPosition]="'top'" [labelVisible]="true" [labelText]="'Rating'"  rating="{{ feedback.rating }}"></star-rating-comp>
+      <br> <div class="center">{{feedback.comment}}</div> 
+      <br> {{feedback.updatedAt}}
+      
     </ng-template>  
     
-    </li>
+  </div>
 
   </span>
 </div>

@@ -35,9 +35,11 @@ export class DayComponent implements OnInit {
   public initEventData(feedbackData): void {
     this.allFeedback = feedbackData;
     for (let j = 0; j < this.day.timeSlots.length; j++) {
-      if (this.day.timeSlots[j].feedback === undefined) {
+      if (this.day.timeSlots[j].feedback === undefined || this.day.timeSlots[j].feedback.length !== 0) {
         this.day.timeSlots[j].feedback = [];
       }
+    }
+    for (let j = 0; j < this.day.timeSlots.length; j++) {
       for (let i = 0; i < this.allFeedback.length; i++) {
         if (this.allFeedback[i].eventid === this.day.timeSlots[j].id) {
           this.day.timeSlots[j].feedback.push(this.allFeedback[i]);
@@ -57,10 +59,10 @@ export class DayComponent implements OnInit {
       }, error => {
         this.initEventData([]);
       });
-      this.userService.getUserData()
+    this.userService.getUserData()
       .subscribe(results => {
-      console.log("userdata is: " + results['payload'].userid);
-      this.user.id = results['payload'].userid;
+        console.log("userdata is: " + results['payload'].userid);
+        this.user.id = results['payload'].userid;
       })
   }
 

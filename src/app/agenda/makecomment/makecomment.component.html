@@ -1,4 +1,5 @@
-Comment: <input  type="text" [(ngModel)] ="comment" name="comment"><br>
 <star-rating-comp [starType]="'svg'" (onRatingChange)="ratingChanged($event)" [labelPosition]="'top'" [labelVisible]="true" [labelText]="'Rating'" [staticColor]="'ok'" [size]="'large'" ></star-rating-comp>
-<input type="submit" value="Submit" (click)="submitClicked()" > <br>
+<div class = "comment" >
+<div class ="center oneline"><textarea autosize placeholder="Enter your comment here" [minRows]="1" [maxRows]="15" rows="1" cols="50" [(ngModel)] ="comment" name="comment"></textarea></div>
+<br><div class="center"><input class="capbutton" type="submit" value="Submit" (click)="submitClicked()"></div>
 

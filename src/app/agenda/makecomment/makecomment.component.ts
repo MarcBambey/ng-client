@@ -18,6 +18,8 @@ export class MakecommentComponent implements OnInit {
   public comment: string = "";
   public rating: number = 0;
 
+  
+
   ngOnInit() {
 
   }
@@ -39,14 +41,14 @@ export class MakecommentComponent implements OnInit {
      
     }
     this.commentService.postFeedback(feedback)
-      .subscribe(results => {
-        alert("Successfully added comment");
-        
-        this.timeSlotFeedback.push(feedback);
+      .subscribe(results => {  
+        this.timeSlotFeedback.push(results['feedback']);
 
       }, error => {
         alert(error.error['failed']);
       })
 
   }
+
+  
 }

@@ -10,6 +10,8 @@ import { CommentComponent } from './comment/comment.component';
 import { MakecommentComponent } from './makecomment/makecomment.component';
 import {FormsModule} from '@angular/forms';
 import {StarRatingModule} from 'angular-star-rating';
+import {AutosizeModule} from 'ngx-autosize';
+
 
 
 
@@ -19,6 +21,7 @@ import {StarRatingModule} from 'angular-star-rating';
     StarRatingModule,
     FormsModule,
     SharedModule,
+    AutosizeModule,
     
     
   ],

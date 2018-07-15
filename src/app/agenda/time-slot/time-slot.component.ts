@@ -60,6 +60,17 @@ export class TimeSlotComponent implements OnInit {
     .subscribe(results => {
       alert("Successfully updated Rating");
     })
+    this.updateOwnComment(feedback);
   }
 
+  deleteFeedback(feedback){
+    this.commentService.deleteFeedback(feedback)
+    .subscribe(results =>{
+      for (let i =0 ; i<this.timeSlot.feedback.length ; i++){
+        if (this.timeSlot.feedback[i].id === feedback.id){
+          this.timeSlot.feedback = this.timeSlot.feedback.splice(this.timeSlot.feedback[i].id, 1);
+        }
+      }
+    })
+  }
 }

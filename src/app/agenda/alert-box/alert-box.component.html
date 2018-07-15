@@ -1,0 +1,21 @@
+<div class="popup-background" *ngIf="isVisible">
+
+  </div>
+  
+  <div class="popup-grid" *ngIf="isVisible">
+    <div class="popup-box">
+      <div class="popup-box-top-circle">
+        <span class="helper"></span>
+        <img class="popup-box-top-circle-image" src="assets/logo.png" />
+      </div>
+      <div class="popup-box-title-bar">
+        {{ heading }}
+      </div>
+      <div class="popup-box-content">
+        {{ message }}
+      </div>
+      <div class="popup-box-footer">
+        <button class="close" (click)="close()">{{ submitText }}</button>
+      </div>
+    </div>
+  </div>
