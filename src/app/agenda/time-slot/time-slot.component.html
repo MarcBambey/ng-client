@@ -17,22 +17,34 @@
     </span>
   </p>
   <span [hidden] = isHidden>
-    <ea-makecomment [timeSlotFeedback] = this.timeSlot.feedback>
-
+   <div *ngIf="!this.madeComment">
+    <ea-makecomment (madeComment)="getComment($event)" [timeSlotFeedback] = this.timeSlot.feedback>
     </ea-makecomment>
+  </div>
     <div class="singleComment" *ngFor="let feedback of this.timeSlot.feedback">
       <div  *ngIf = "user.id == feedback.userId; else normalDisplay">  
-          <star-rating-comp [starType]="'svg'" (onRatingChange)="updateOwnRating($event,feedback)" [labelPosition]="'top'" [labelVisible]="true" [labelText]="'Rating'" rating="{{ feedback.rating }}" [staticColor]="'ok'" [size]="'large'" ></star-rating-comp>
+          <star-rating-comp [starType]="'svg'" (onRatingChange)="updateOwnRating($event,feedback)"  rating="{{ feedback.rating }}" [staticColor]="'ok'" [size]="'medium'" ></star-rating-comp>
           <div class ="center"><textarea autosize [minRows]="1" [maxRows]="15" rows="1" cols="50" [(ngModel)] = "feedback.comment"  ></textarea>
           <br> <input class="capbutton" type ="submit" name="Update Feedback" value="Update Feedback" (click)="update(feedback)"> 
-         <br> <button class="capdelete" (click) = "deleteFeedback(feedback)" >Delete </button>
+         <br> <input class="capdelete" type="submit" value="Delete" (click) = "deleteFeedback(feedback)">
         </div>
       </div>
 
       <ng-template #normalDisplay>
-          <star-rating-comp [starType]="'svg'" [staticColor]="'ok'" [size]="'large'" [readOnly]="'true'" [labelPosition]="'top'" [labelVisible]="true" [labelText]="'Rating'"  rating="{{ feedback.rating }}"></star-rating-comp>
+          <star-rating-comp [starType]="'svg'" [staticColor]="'ok'" [size]="'medium'" [readOnly]="'true'"  rating="{{ feedback.rating }}"></star-rating-comp>
       <br> <div class="center">{{feedback.comment}}</div> 
-      <br> {{feedback.updatedAt}}
+      <div class="smallFont" *ngIf="feedback.minutes>=0">
+      <br>{{feedback.minutes}} minute(s) ago
+    </div>
+    <div class="smallFont" *ngIf="feedback.hours>0">
+      <br> {{feedback.hours}} Hour(s) ago
+    </div>
+    <div class="smallFont" *ngIf="feedback.days>0">
+        <br> {{feedback.days}} day(s) ago
+      </div>
+      <div class="smallFont" *ngIf="feedback.years>0">
+          <br> {{feedback.years}} year(s) ago
+        </div>
       
     </ng-template>  
     

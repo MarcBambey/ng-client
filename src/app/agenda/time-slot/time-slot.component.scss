@@ -103,6 +103,10 @@ textarea{
   font-size: 17px;
 }
 
+.smallFont{
+  font-size: 13px;
+}
+
 @media(max-width: 600px ){
     textarea{
         resize: none;

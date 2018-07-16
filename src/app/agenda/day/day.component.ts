@@ -32,6 +32,13 @@ export class DayComponent implements OnInit {
   constructor(private agendaService: AgendaService, private dayService: DayService, private commentService: CommentService, private userService: UserService, private user: User) {
   }
 
+  /**
+   *This function initializes all feedback to the appropriate events and all other things e.g.
+   * streams,slotsmap or hours aswell.
+   *
+   * @param {*} feedbackData
+   * @memberof DayComponent
+   */
   public initEventData(feedbackData): void {
     this.allFeedback = feedbackData;
     for (let j = 0; j < this.day.timeSlots.length; j++) {
@@ -52,6 +59,11 @@ export class DayComponent implements OnInit {
     this.hours = Object.keys(this.slotsMap);
   }
 
+  /**
+   *When the day is called the data for the feedbacks is requested from the server.
+   *Afterwards it is getting initialized with initEventData. Also we get the userid and save it in our global user.
+   * @memberof DayComponent
+   */
   ngOnInit() {
     this.commentService.getFeedbackForEvent()
       .subscribe(results => {
@@ -61,7 +73,6 @@ export class DayComponent implements OnInit {
       });
     this.userService.getUserData()
       .subscribe(results => {
-        console.log("userdata is: " + results['payload'].userid);
         this.user.id = results['payload'].userid;
       })
   }

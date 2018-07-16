@@ -4,6 +4,13 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
 
+/**
+ *This intereceptor intercepts every request made. It adds the token which we have in our localStorage to the request
+ *In the case of a non existing token it creates a new one and adds it to the request.
+ * @export
+ * @class RequestInterceptor
+ * @implements {HttpInterceptor}
+ */
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

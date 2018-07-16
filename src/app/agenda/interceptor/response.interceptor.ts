@@ -4,6 +4,13 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, Htt
 import { Observable } from 'rxjs/Rx';
 
 
+/**
+ *This intereceptor is used for every single response. 
+ *If we receive a token from the backend it is saved into our localStorage
+ * @export
+ * @class ResponseInterceptor
+ * @implements {HttpInterceptor}
+ */
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
     
