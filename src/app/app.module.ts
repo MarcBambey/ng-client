@@ -17,6 +17,8 @@ import { CommentComponent } from './agenda/comment/comment.component';
 import {UserService} from './services/user.service';
 import { AlertService } from './services/alert.service';
 import { AlertBoxComponent } from './agenda/alert-box/alert-box.component';
+import { InputBoxComponent } from './agenda/input-box/input-box.component';
+import { FormsModule } from '../../node_modules/@angular/forms';
 
 
 
@@ -27,6 +29,7 @@ import { AlertBoxComponent } from './agenda/alert-box/alert-box.component';
   declarations: [
     AppComponent,
     AlertBoxComponent,
+    InputBoxComponent,
     //CommentComponent
   ],
   imports: [
@@ -39,6 +42,7 @@ import { AlertBoxComponent } from './agenda/alert-box/alert-box.component';
     AgendaModule,
     StreamsModule,
     VenueModule,
+    FormsModule,
     
 
     

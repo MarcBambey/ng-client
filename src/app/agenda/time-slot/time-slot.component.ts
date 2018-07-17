@@ -7,6 +7,8 @@ import { Feedback } from '../model/feedback';
 import { User } from '../globals';
 import { CommentService } from '../../services/comment.service';
 import { MakecommentComponent } from '../makecomment/makecomment.component';
+import { templateJitUrl } from '../../../../node_modules/@angular/compiler';
+import { PasswordService } from '../../services/password.service';
 
 @Component({
   selector: 'ea-time-slot',
@@ -23,7 +25,8 @@ export class TimeSlotComponent implements OnInit {
   isHidden: boolean = true;
   madeComment: boolean = false;
 
-  constructor(@Inject(forwardRef(() => DayComponent)) private _day: DayComponent, private commentService: CommentService, private agendaService: AgendaService, private presenterService: PresenterService, public user: User) { }
+  constructor(@Inject(forwardRef(() => DayComponent)) private _day: DayComponent, private commentService: CommentService, 
+  private agendaService: AgendaService, private presenterService: PresenterService, public user: User,private passwordService: PasswordService) { }
 
   ngOnInit() {
     this.presenters = this.presenterService.getDisplayablePresenters(this.agendaService.getPresenters(), this.timeSlot.presenters);
@@ -33,6 +36,11 @@ export class TimeSlotComponent implements OnInit {
       this.timeSlot.feedback.length = 0;
     }
     this.calculateTimes();
+    for (let i= 0; i<this.timeSlot.feedback.length; i++){
+      if(this.timeSlot.feedback[i].userId === this.user.id){
+        this.madeComment = true;
+      }
+    }
   }
 
   
@@ -171,7 +179,16 @@ export class TimeSlotComponent implements OnInit {
    * @memberof TimeSlotComponent
    */
   getComment(value) {
+    console.log("The getComment value: " + value);
     this.madeComment = value;
   }
+
+  downloadClick(){
+    this.passwordService.confirmToken()
+    .subscribe(results =>{
+      console.log("Successfully done confirm token");
+    })
+  }
+
 
 }

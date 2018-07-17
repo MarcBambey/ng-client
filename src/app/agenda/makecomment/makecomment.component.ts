@@ -36,6 +36,7 @@ export class MakecommentComponent implements OnInit {
    */
   ngOnInit() {
     for (let i = 0; i < this.timeSlotFeedback.length; i++) {
+      this.madeComment.emit(false);
       if (this.timeSlotFeedback[i].userId === this.user.id) {
         this.madeComment.emit(true);
       }

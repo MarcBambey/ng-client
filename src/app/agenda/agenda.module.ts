@@ -11,6 +11,8 @@ import { MakecommentComponent } from './makecomment/makecomment.component';
 import {FormsModule} from '@angular/forms';
 import {StarRatingModule} from 'angular-star-rating';
 import {AutosizeModule} from 'ngx-autosize';
+import { PasswordService } from '../services/password.service';
+import { InputBoxComponent } from './input-box/input-box.component';
 
 
 
@@ -26,6 +28,6 @@ import {AutosizeModule} from 'ngx-autosize';
     
   ],
   declarations: [DayComponent, AgendaComponent, TimeSlotComponent,CommentComponent, MakecommentComponent,],
-  providers: [AgendaResolve, AgendaService, DayService,]
+  providers: [AgendaResolve, AgendaService, DayService,PasswordService]
 })
 export class AgendaModule { }

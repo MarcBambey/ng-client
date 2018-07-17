@@ -1,0 +1,21 @@
+<div class="popup-background" *ngIf="visible">
+
+</div>
+
+<div class="popup-grid" *ngIf="visible">
+  <div class="popup-box">
+    <div class="popup-box-top-circle">
+      <span class="helper"></span>
+      <img class="popup-box-top-circle-image" src="assets/logo.png" />
+    </div>
+    <div class="popup-box-content">
+      {{ message }}
+    </div>
+    <div>
+      <input type="text" name="password" [(ngModel)] ="password">
+    </div>
+    <div class="popup-box-footer">
+      <button class="close" (click)="submitPassword(password)" value="Submit">Submit</button>
+    </div>
+  </div>
+</div>

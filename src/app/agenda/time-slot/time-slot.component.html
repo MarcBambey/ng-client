@@ -15,6 +15,10 @@
       <mat-icon>speaker_notes</mat-icon>
       <span class="icon-label">{{this.timeSlot.feedback.length}} Comment(s)</span>
     </span>
+    <span class="event-detail room" *ngIf="timeSlot.room" (click)="downloadClick()">
+      <mat-icon>cloud_download</mat-icon>
+      <span class="icon-label">Download</span>
+    </span>
   </p>
   <span [hidden] = isHidden>
    <div *ngIf="!this.madeComment">
