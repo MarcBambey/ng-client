@@ -21,12 +21,14 @@
     </span>
   </p>
   <span [hidden] = isHidden>
-   <div *ngIf="!this.madeComment">
+   UserID:  {{this.user.id}} 
+   <div *ngIf="!this.hasMadeComment()">
     <ea-makecomment (madeComment)="getComment($event)" [timeSlotFeedback] = this.timeSlot.feedback>
     </ea-makecomment>
   </div>
     <div class="singleComment" *ngFor="let feedback of this.timeSlot.feedback">
       <div  *ngIf = "user.id == feedback.userId; else normalDisplay">  
+      Useridfeedback:  {{feedback.userId}}
           <star-rating-comp [starType]="'svg'" (onRatingChange)="updateOwnRating($event,feedback)"  rating="{{ feedback.rating }}" [staticColor]="'ok'" [size]="'medium'" ></star-rating-comp>
           <div class ="center"><textarea autosize [minRows]="1" [maxRows]="15" rows="1" cols="50" [(ngModel)] = "feedback.comment"  ></textarea>
           <br> <input class="capbutton" type ="submit" name="Update Feedback" value="Update Feedback" (click)="update(feedback)"> 

@@ -36,13 +36,18 @@ export class TimeSlotComponent implements OnInit {
       this.timeSlot.feedback.length = 0;
     }
     this.calculateTimes();
-    for (let i= 0; i<this.timeSlot.feedback.length; i++){
-      if(this.timeSlot.feedback[i].userId === this.user.id){
-        this.madeComment = true;
-      }
-    }
+
   }
 
+
+  public hasMadeComment():  boolean {
+    for (let i= 0; i<this.timeSlot.feedback.length; i++){
+        if(this.timeSlot.feedback[i].userId === this.user.id){
+          return true;
+        }
+      }
+  return false;
+  }
   
   /**
    *This function converts the Date Objects and caclulates the time that has passed
