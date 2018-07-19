@@ -8,6 +8,7 @@ import { tap } from '../../../node_modules/rxjs/operators';
 import { AlertService } from './alert.service';
 import { AlertType, SubmitText } from '../agenda/util';
 
+
 @Injectable()
 export class CommentService {
 
@@ -57,6 +58,7 @@ export class CommentService {
    * @memberof CommentService
    */
   deleteFeedback(feedback: Feedback){
+    
     return this.http.delete('http://localhost:5555/api/events/' +feedback.eventid +'/feedback/' +feedback.id)
     .pipe(
       tap(

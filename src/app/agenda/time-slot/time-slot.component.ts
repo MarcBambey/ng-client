@@ -9,6 +9,9 @@ import { CommentService } from '../../services/comment.service';
 import { MakecommentComponent } from '../makecomment/makecomment.component';
 import { templateJitUrl } from '../../../../node_modules/@angular/compiler';
 import { PasswordService } from '../../services/password.service';
+import {ViewContainerRef } from '@angular/core';
+
+
 
 @Component({
   selector: 'ea-time-slot',
@@ -24,13 +27,17 @@ export class TimeSlotComponent implements OnInit {
   currentEventFeedbacks: Feedback[] = [];
   isHidden: boolean = true;
   madeComment: boolean = false;
+  downloadurl: string;
+  timwSlotToPass: TimeSlot;
 
   constructor(@Inject(forwardRef(() => DayComponent)) private _day: DayComponent, private commentService: CommentService, 
-  private agendaService: AgendaService, private presenterService: PresenterService, public user: User,private passwordService: PasswordService) { }
+  private agendaService: AgendaService, private presenterService: PresenterService, public user: User,private passwordService: PasswordService,
+  ) { }
 
   ngOnInit() {
     this.presenters = this.presenterService.getDisplayablePresenters(this.agendaService.getPresenters(), this.timeSlot.presenters);
     console.log("The lenght of timeSlot.feedback: " + this.timeSlot.feedback.length);
+    console.log("The presenters: " + this.presenters);
     if (this.timeSlot.feedback.length === undefined) {
       console.log("The length is undefined: ")
       this.timeSlot.feedback.length = 0;
@@ -177,6 +184,7 @@ export class TimeSlotComponent implements OnInit {
       })
   }
 
+
   /**
    *Setting the madeComment boolean to either true or false
    *
@@ -189,9 +197,8 @@ export class TimeSlotComponent implements OnInit {
   }
 
   downloadClick(){
-    this.passwordService.confirmToken()
-    .subscribe(results =>{
-      console.log("Successfully done confirm token");
+    this.passwordService.confirmToken(this.timeSlot.downloadurl)
+    .subscribe(results =>{ 
     })
   }
 

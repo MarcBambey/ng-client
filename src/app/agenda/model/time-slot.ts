@@ -12,6 +12,14 @@ export class TimeSlot {
   private _isBreak: boolean;
   private _isHidden: boolean;
   private _feedback: Feedback[];
+  private _downloadurl: string;
+
+  get downloadurl():string{
+    return this._downloadurl;
+  }
+  set downloadurl(value: string){
+    this._downloadurl = value;
+  }
 
   get feedback():Feedback[]{
     return this._feedback;

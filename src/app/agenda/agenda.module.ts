@@ -19,6 +19,7 @@ import { InputBoxComponent } from './input-box/input-box.component';
 
 
 @NgModule({
+  exports: [TimeSlotComponent],
   imports: [
     StarRatingModule,
     FormsModule,

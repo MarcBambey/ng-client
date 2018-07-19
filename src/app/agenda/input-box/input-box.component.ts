@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, forwardRef } from '@angular/core';
 import { PasswordService } from '../../services/password.service';
+import { TimeSlotComponent } from '../time-slot/time-slot.component';
 
 @Component({
   selector: 'ea-input-box',
@@ -8,11 +9,12 @@ import { PasswordService } from '../../services/password.service';
 })
 export class InputBoxComponent implements OnInit {
 
-  constructor(private passwordService: PasswordService) { }
+  constructor(private passwordService: PasswordService, ) { }
 
   public visible = false;
   public message = "";
   public password: string = "";
+  public downloadurl: string = ""
 
   ngOnInit() {
     this.passwordService.visible.subscribe(visible => {
@@ -23,6 +25,10 @@ export class InputBoxComponent implements OnInit {
       this.message = message;
     });
 
+    this.passwordService.getDownloadurl.subscribe(downloadurl => {
+      this.downloadurl = downloadurl;
+    });
+
   }
 
   public close(): void {
@@ -31,12 +37,12 @@ export class InputBoxComponent implements OnInit {
 
   submitPassword(password) {
     console.log("Submit pressed");
-    this.passwordService.checkPassword(password)
-    .subscribe(results =>{
-    this.passwordService.hideInput();
-      
-    })
-    this.password="";
+    this.passwordService.checkPassword(password,this.downloadurl)
+      .subscribe(results => {
+        this.passwordService.hideInput();
+
+      })
+    this.password = "";
   }
 
 }

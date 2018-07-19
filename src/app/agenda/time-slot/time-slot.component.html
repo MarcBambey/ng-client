@@ -11,34 +11,39 @@
       <mat-icon>home</mat-icon>
       <span class="icon-label">{{timeSlot.room}}</span>
     </span>
-    <span class ="event-detail" *ngIf="timeSlot.room" (click)="commentClick()">
+    <span class ="event-detail clickable" *ngIf="timeSlot.room" (click)="commentClick()">
       <mat-icon>speaker_notes</mat-icon>
       <span class="icon-label">{{this.timeSlot.feedback.length}} Comment(s)</span>
     </span>
-    <span class="event-detail room" *ngIf="timeSlot.room" (click)="downloadClick()">
+    <span  class="event-detail room clickable" *ngIf="timeSlot.room && timeSlot.downloadurl" (click)="downloadClick()">
       <mat-icon>cloud_download</mat-icon>
       <span class="icon-label">Download</span>
     </span>
   </p>
   <span [hidden] = isHidden>
-   UserID:  {{this.user.id}} 
+    <br/>
+      <span class="icon-label">{{this.timeSlot.feedback.length}} Comment(s)</span>
    <div *ngIf="!this.hasMadeComment()">
     <ea-makecomment (madeComment)="getComment($event)" [timeSlotFeedback] = this.timeSlot.feedback>
     </ea-makecomment>
   </div>
     <div class="singleComment" *ngFor="let feedback of this.timeSlot.feedback">
       <div  *ngIf = "user.id == feedback.userId; else normalDisplay">  
-      Useridfeedback:  {{feedback.userId}}
+        <div class="star">
           <star-rating-comp [starType]="'svg'" (onRatingChange)="updateOwnRating($event,feedback)"  rating="{{ feedback.rating }}" [staticColor]="'ok'" [size]="'medium'" ></star-rating-comp>
+        </div>
+        <br/>
           <div class ="center"><textarea autosize [minRows]="1" [maxRows]="15" rows="1" cols="50" [(ngModel)] = "feedback.comment"  ></textarea>
-          <br> <input class="capbutton" type ="submit" name="Update Feedback" value="Update Feedback" (click)="update(feedback)"> 
+          <br/> <input class="capbutton" type ="submit" name="Update Feedback" value="Update Feedback" (click)="update(feedback)"> 
          <br> <input class="capdelete" type="submit" value="Delete" (click) = "deleteFeedback(feedback)">
         </div>
       </div>
 
       <ng-template #normalDisplay>
+        <div class="star">
           <star-rating-comp [starType]="'svg'" [staticColor]="'ok'" [size]="'medium'" [readOnly]="'true'"  rating="{{ feedback.rating }}"></star-rating-comp>
-      <br> <div class="center">{{feedback.comment}}</div> 
+        </div>
+          <br/> <div class="center">{{feedback.comment}}</div> 
       <div class="smallFont" *ngIf="feedback.minutes>=0">
       <br>{{feedback.minutes}} minute(s) ago
     </div>

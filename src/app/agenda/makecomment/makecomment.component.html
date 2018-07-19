@@ -1,6 +1,12 @@
+<br/>
+<div class ="star">
+<star-rating-comp class="center" [starType]="'svg'" (onRatingChange)="ratingChanged($event)"  [staticColor]="'ok'" [size]="'medium'" ></star-rating-comp>
+</div>
 
-<star-rating-comp [starType]="'svg'" (onRatingChange)="ratingChanged($event)"  [staticColor]="'ok'" [size]="'medium'" ></star-rating-comp>
 <div class = "comment" >
+        <br/>
 <div class ="center oneline"><textarea autosize placeholder="Enter your comment here" [minRows]="1" [maxRows]="15" rows="1" cols="50" [(ngModel)] ="comment" name="comment"></textarea></div>
-<br><div class="center"><input class="capbutton" type="submit" value="Submit" (click)="submitClicked()"></div>
+<br>
+<div class="center"><input class="capbutton" type="submit" value="Submit" (click)="submitClicked()"></div>
+</div>
 

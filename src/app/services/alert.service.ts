@@ -3,6 +3,8 @@ import { AlertType } from '../agenda/util';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SubmitText } from '../agenda/util';
 
+
+
 @Injectable()
 export class AlertService {
 
@@ -11,6 +13,7 @@ export class AlertService {
   private message = new BehaviorSubject<string>('');
   private submitText = new BehaviorSubject<SubmitText>(SubmitText.CLOSE);
 
+
   constructor() { }
 
   public displayMessage(heading: AlertType, message: string, submitText: SubmitText): void {
@@ -18,6 +21,16 @@ export class AlertService {
     this.message.next(message);
     this.submitText.next(submitText);
     this.visible.next(true);
+    this.initiateTimer();
+  }
+
+  initiateTimer() {
+    var numbers = Observable.timer(2500);
+    let timerSubscription =
+      numbers.subscribe(result => {
+        this.hideMessage();
+        timerSubscription.unsubscribe();
+      });
   }
 
   public hideMessage(): void {
