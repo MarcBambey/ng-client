@@ -19,6 +19,11 @@ import { AlertService } from './services/alert.service';
 import { AlertBoxComponent } from './agenda/alert-box/alert-box.component';
 import { InputBoxComponent } from './agenda/input-box/input-box.component';
 import { FormsModule } from '../../node_modules/@angular/forms';
+import { ConfirmationDialogService } from './services/confirmation-dialog.service';
+import { ConfirmationDialogComponent } from './agenda/confirmation-dialog/confirmation-dialog.component';
+
+
+
 
 
 
@@ -31,6 +36,7 @@ import { FormsModule } from '../../node_modules/@angular/forms';
     AppComponent,
     AlertBoxComponent,
     InputBoxComponent,
+    ConfirmationDialogComponent,
     //CommentComponent
   ],
   imports: [
@@ -44,6 +50,8 @@ import { FormsModule } from '../../node_modules/@angular/forms';
     StreamsModule,
     VenueModule,
     FormsModule,
+    
+    
     
     
 
@@ -63,6 +71,8 @@ import { FormsModule } from '../../node_modules/@angular/forms';
     UserService,
     CommentService,
     AlertService,
+    ConfirmationDialogService
+    
     
   ],
   bootstrap: [AppComponent],

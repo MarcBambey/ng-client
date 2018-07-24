@@ -35,7 +35,10 @@
         <br/>
           <div class ="center"><textarea autosize [minRows]="1" [maxRows]="15" rows="1" cols="50" [(ngModel)] = "feedback.comment"  ></textarea>
           <br/> <input class="capbutton" type ="submit" name="Update Feedback" value="Update Feedback" (click)="update(feedback)"> 
-         <br> <input class="capdelete" type="submit" value="Delete" (click) = "deleteFeedback(feedback)">
+         <br> <input class="capdelete" type="submit" value="Delete" (click) = "deleteClick(feedback)">
+         
+
+
         </div>
       </div>
 

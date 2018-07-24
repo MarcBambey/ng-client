@@ -1,0 +1,119 @@
+@import '../../../variables';
+
+.popup-background {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 10000;
+ }
+ 
+ .popup-grid {
+     height: 100%;
+     display: grid;
+     position: fixed;
+     left: 0px;
+     top: 0px;
+     height: 100%;
+     width: 100%;
+     z-index: 10000;
+     box-shadow: 5px 10px 18px #888888;
+ }
+ 
+ .popup-box {
+     margin: auto;
+     min-width: 200px;
+     max-width: 300px;
+     border-radius:14px;
+     background-color: white;
+     padding: 5px;
+ }
+
+ .popup-box-top-circle {
+     position: relative;
+     margin: auto;
+     border-radius: 50%;
+     width: 60px;
+     height: 60px;
+     top: -30px;
+     margin-bottom: -30px;
+     text-align: center;
+     vertical-align: middle;
+     overflow: hidden;
+     background-color: white;
+     white-space: nowrap;
+ }
+
+ .helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+ .popup-box-top-circle-image {
+    vertical-align: middle;
+     border-radius: 50%;
+     height: 50px;
+     width: 50px;
+ }
+
+ .popup-box-title-bar {
+     background-color: white;
+     color: black;
+     font-size: 22px;
+     padding: 5px;
+     text-align: center;
+ }
+
+ .popup-box-content {
+     background-color: white;
+     padding: 5px;
+     color: black;
+     text-align: center;
+     margin-bottom: 5px;
+ }
+
+ .popup-box-footer {
+    background-color: white;
+    text-align: right;
+    padding: 5px;
+ }
+
+ .close {
+     width: 100%;
+     background-color: $ea-zest-green ;
+     border-radius: 4px;
+     color: white;
+     outline: 0;
+     border: none;
+     padding: 5px 0px 5px;
+ }
+
+ .capdelete{
+    background-color: $ea-tech-red;
+    border-radius: 4px;
+    color: white;
+    outline: 0;
+    border: none;
+    padding: 5px 0px 5px;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 8px;
+    padding-top: 12px;
+  }
+
+  .capbutton {
+    width: 100%;
+    background-color: $ea-zest-green ;
+    border-radius: 4px;
+    color: white;
+    outline: 0;
+    border: none;
+    padding: 5px 0px 5px;
+    max-width: 500px;
+    margin-top: 8px;
+    padding-top: 10px;
+}

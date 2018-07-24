@@ -33,6 +33,7 @@ export class PasswordService {
     }
 
     displayInput(message: string, downloadurl: string) {
+        console.log("In displayInput");
         this.message.next(message);
         this.visible.next(true);
         this.downloadurl.next(downloadurl);

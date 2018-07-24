@@ -9,7 +9,11 @@ import { CommentService } from '../../services/comment.service';
 import { MakecommentComponent } from '../makecomment/makecomment.component';
 import { templateJitUrl } from '../../../../node_modules/@angular/compiler';
 import { PasswordService } from '../../services/password.service';
-import {ViewContainerRef } from '@angular/core';
+import { ViewContainerRef } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
+import { ConfirmationDialogService } from '../../services/confirmation-dialog.service';
+import { AlertType, SubmitText } from '../util';
+
 
 
 
@@ -30,16 +34,13 @@ export class TimeSlotComponent implements OnInit {
   downloadurl: string;
   timwSlotToPass: TimeSlot;
 
-  constructor(@Inject(forwardRef(() => DayComponent)) private _day: DayComponent, private commentService: CommentService, 
-  private agendaService: AgendaService, private presenterService: PresenterService, public user: User,private passwordService: PasswordService,
-  ) { }
+  constructor(@Inject(forwardRef(() => DayComponent)) private _day: DayComponent, private commentService: CommentService,
+    private agendaService: AgendaService, private presenterService: PresenterService, public user: User, private passwordService: PasswordService,
+    public confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit() {
     this.presenters = this.presenterService.getDisplayablePresenters(this.agendaService.getPresenters(), this.timeSlot.presenters);
-    console.log("The lenght of timeSlot.feedback: " + this.timeSlot.feedback.length);
-    console.log("The presenters: " + this.presenters);
     if (this.timeSlot.feedback.length === undefined) {
-      console.log("The length is undefined: ")
       this.timeSlot.feedback.length = 0;
     }
     this.calculateTimes();
@@ -47,15 +48,15 @@ export class TimeSlotComponent implements OnInit {
   }
 
 
-  public hasMadeComment():  boolean {
-    for (let i= 0; i<this.timeSlot.feedback.length; i++){
-        if(this.timeSlot.feedback[i].userId === this.user.id){
-          return true;
-        }
+  public hasMadeComment(): boolean {
+    for (let i = 0; i < this.timeSlot.feedback.length; i++) {
+      if (this.timeSlot.feedback[i].userId === this.user.id) {
+        return true;
       }
-  return false;
+    }
+    return false;
   }
-  
+
   /**
    *This function converts the Date Objects and caclulates the time that has passed
    *since the Feedback was created. It saves it then in the appropriate Feedback variable.
@@ -74,13 +75,10 @@ export class TimeSlotComponent implements OnInit {
       let months = days * 30;
       let years = days * 365
       let timeInMinutes = Math.round(differenceTime / minutes);
-      console.log("Time in Minutes: " + timeInMinutes);
       if (timeInMinutes > 60) {
         let timeInHours = Math.round(differenceTime / hours);
-        console.log("Time in hours: " + timeInHours);
         if (timeInHours > 24) {
           let timeInDays = Math.round(differenceTime / days);
-          console.log("Time in days: " + timeInDays);
           if (timeInDays > 30) {
             let timeInMonths = Math.round(differenceTime / months);
             if (timeInMonths > 12) {
@@ -130,10 +128,9 @@ export class TimeSlotComponent implements OnInit {
    * @memberof TimeSlotComponent
    */
   updateOwnComment(feedback) {
-    console.log("in updateComment");
     this.commentService.updateComment(feedback)
       .subscribe(results => {
-        alert("Successfully updated comment");
+        
       })
   }
 
@@ -146,9 +143,6 @@ export class TimeSlotComponent implements OnInit {
    */
   updateOwnRating(event, feedback) {
     feedback.rating = event['rating'];
-    console.log("The keys: " + Object.keys(event));
-    console.log("They values: " + Object.values(event));
-    console.log(feedback.rating);
   }
 
   /**
@@ -161,7 +155,6 @@ export class TimeSlotComponent implements OnInit {
   update(feedback) {
     this.commentService.updateRating(feedback)
       .subscribe(results => {
-        alert("Successfully updated Rating");
       })
     this.updateOwnComment(feedback);
   }
@@ -184,6 +177,13 @@ export class TimeSlotComponent implements OnInit {
       })
   }
 
+  public deleteClick(feedback: Feedback) {
+    this.confirmationDialogService.displayConfirmation(AlertType.CONFIRM, "Are you sure you want to delete this?", SubmitText.CLOSE,  () => {
+      this.deleteFeedback(feedback);
+      this.confirmationDialogService.hideMessage();
+  });
+}
+
 
   /**
    *Setting the madeComment boolean to either true or false
@@ -192,15 +192,18 @@ export class TimeSlotComponent implements OnInit {
    * @memberof TimeSlotComponent
    */
   getComment(value) {
-    console.log("The getComment value: " + value);
     this.madeComment = value;
   }
 
-  downloadClick(){
+  downloadClick() {
     this.passwordService.confirmToken(this.timeSlot.downloadurl)
-    .subscribe(results =>{ 
-    })
+      .subscribe(results => {
+      })
   }
+
+
+
+
 
 
 }
