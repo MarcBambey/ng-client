@@ -36,7 +36,6 @@ export class InputBoxComponent implements OnInit {
   }
 
   submitPassword(password) {
-    console.log("Submit pressed");
     this.passwordService.checkPassword(password,this.downloadurl)
       .subscribe(results => {
         this.passwordService.hideInput();

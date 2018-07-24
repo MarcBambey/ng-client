@@ -27,7 +27,7 @@ export class DayComponent implements OnInit {
   slotsMap: Object = {};
   gridTemplateColumns = '1fr';
   allFeedback: Feedback[];
-  //isHidden: boolean = false;
+  
 
   constructor(private agendaService: AgendaService, private dayService: DayService, private commentService: CommentService, private userService: UserService, private user: User) {
   }

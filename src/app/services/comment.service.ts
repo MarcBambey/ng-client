@@ -23,8 +23,6 @@ export class CommentService {
    * @memberof CommentService
    */
   getFeedbackForEvent() {
-    //console.log(this.http.post<Feedback[]>('http://localhost:5555/getFeedback' + event.eventid, event.eventname));
-    console.log("In CommentService");
     return this.http.get('http://localhost:5555/api/events/feedbacks')
   }
   

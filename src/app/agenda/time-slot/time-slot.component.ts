@@ -7,10 +7,7 @@ import { Feedback } from '../model/feedback';
 import { User } from '../globals';
 import { CommentService } from '../../services/comment.service';
 import { MakecommentComponent } from '../makecomment/makecomment.component';
-import { templateJitUrl } from '../../../../node_modules/@angular/compiler';
 import { PasswordService } from '../../services/password.service';
-import { ViewContainerRef } from '@angular/core';
-import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ConfirmationDialogService } from '../../services/confirmation-dialog.service';
 import { AlertType, SubmitText } from '../util';
 
@@ -130,7 +127,7 @@ export class TimeSlotComponent implements OnInit {
   updateOwnComment(feedback) {
     this.commentService.updateComment(feedback)
       .subscribe(results => {
-        
+
       })
   }
 
@@ -178,11 +175,11 @@ export class TimeSlotComponent implements OnInit {
   }
 
   public deleteClick(feedback: Feedback) {
-    this.confirmationDialogService.displayConfirmation(AlertType.CONFIRM, "Are you sure you want to delete this?", SubmitText.CLOSE,  () => {
+    this.confirmationDialogService.displayConfirmation(AlertType.CONFIRM, "Are you sure you want to delete this?", SubmitText.CLOSE, () => {
       this.deleteFeedback(feedback);
       this.confirmationDialogService.hideMessage();
-  });
-}
+    });
+  }
 
 
   /**
@@ -200,10 +197,4 @@ export class TimeSlotComponent implements OnInit {
       .subscribe(results => {
       })
   }
-
-
-
-
-
-
 }

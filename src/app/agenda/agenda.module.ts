@@ -6,7 +6,6 @@ import {TimeSlotComponent} from './time-slot/time-slot.component';
 import {AgendaResolve} from './agenda.resolve';
 import {AgendaService} from './agenda.service';
 import {DayService} from './day/day.service';
-import { CommentComponent } from './comment/comment.component';
 import { MakecommentComponent } from './makecomment/makecomment.component';
 import {FormsModule} from '@angular/forms';
 import {StarRatingModule} from 'angular-star-rating';
@@ -28,13 +27,10 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     FormsModule,
     SharedModule,
     AutosizeModule,
-    NgxSmartModalModule.forRoot()
-    
-    
-    
+    NgxSmartModalModule.forRoot() 
   ],
   
-  declarations: [DayComponent, AgendaComponent, TimeSlotComponent,CommentComponent, MakecommentComponent,],
+  declarations: [DayComponent, AgendaComponent, TimeSlotComponent, MakecommentComponent,],
   providers: [AgendaResolve, AgendaService, DayService,PasswordService]
 })
 export class AgendaModule { }

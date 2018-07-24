@@ -24,7 +24,7 @@ export class PasswordService {
         this.visible.next(false);
     }
 
-    public get getDownloadurl():Observable<string>{
+    public get getDownloadurl(): Observable<string> {
         return this.downloadurl.asObservable();
     }
 
@@ -33,7 +33,6 @@ export class PasswordService {
     }
 
     displayInput(message: string, downloadurl: string) {
-        console.log("In displayInput");
         this.message.next(message);
         this.visible.next(true);
         this.downloadurl.next(downloadurl);
@@ -48,10 +47,9 @@ export class PasswordService {
                 .pipe(
                     tap(
                         ((data) => {
-                            console.log("The url: " + downloadurl)
                             window.open(downloadurl);
                         }),
-                        error => this.displayInput("Enter the password",downloadurl),
+                        error => this.displayInput("Enter the password", downloadurl),
 
                     )
                 )
@@ -67,7 +65,7 @@ export class PasswordService {
                 tap(
                     ((data) => {
                         if (downloadurl === undefined) {
-                            this.alertService.displayMessage(AlertType.ERROR, "No materials available for this event", SubmitText.CLOSE);  
+                            this.alertService.displayMessage(AlertType.ERROR, "No materials available for this event", SubmitText.CLOSE);
                         } else {
                             window.open(downloadurl);
                         }
@@ -75,7 +73,6 @@ export class PasswordService {
                     ((error) => {
                         this.hideInput();
                         this.alertService.displayMessage(AlertType.ERROR, error.error['failed'], SubmitText.CLOSE);
-
                     })
                 )
             )
