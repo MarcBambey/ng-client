@@ -29,6 +29,7 @@ export class InputBoxComponent implements OnInit {
       this.downloadurl = downloadurl;
     });
 
+    document.addEventListener('keydown', this.eventHandler.bind(this));
   }
 
   public close(): void {
@@ -43,5 +44,28 @@ export class InputBoxComponent implements OnInit {
       })
     this.password = "";
   }
+
+  
+
+  eventHandler(event) {
+    console.log(event.keyCode);
+    if(event.keyCode == 27){
+      console.log("Equal");
+      this.passwordService.hideInput();
+    }
+ } 
+
+ stopPropagate(event){
+  event.stopPropagation(); 
+ }
+
+ onKeydown(event){
+   if(event.keyCode == 27){
+     this.passwordService.hideInput();
+   }
+   if(event.keyCode == 13){
+     this.submitPassword(this.password);
+   }
+ }
 
 }

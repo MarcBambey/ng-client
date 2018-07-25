@@ -1,68 +1,71 @@
 <h2 class="title mat-title">{{timeSlot.name}}</h2>
 <div>
-  <p class="description mat-body-1" *ngIf="timeSlot.description">{{timeSlot.description}}</p>
-  <p class="presenter mat-body-1" *ngIf="presenters">{{presenters}}</p>
-  <p class="details">
-    <span class="event-detail hours" *ngIf="timeSlot.startTime && timeSlot.endTime">
-      <mat-icon>alarm</mat-icon>
-      <span class="icon-label">{{timeSlot.startTime}} - {{timeSlot.endTime}}</span>
-    </span>
-    <span class="event-detail room" *ngIf="timeSlot.room">
-      <mat-icon>home</mat-icon>
-      <span class="icon-label">{{timeSlot.room}}</span>
-    </span>
-    <span class ="event-detail clickable" *ngIf="timeSlot.room" (click)="commentClick()">
-      <mat-icon>speaker_notes</mat-icon>
-      <span class="icon-label">{{this.timeSlot.feedback.length}} Comment(s)</span>
-    </span>
-    <span  class="event-detail room clickable" *ngIf="timeSlot.room && timeSlot.downloadurl" (click)="downloadClick()">
-      <mat-icon>cloud_download</mat-icon>
-      <span class="icon-label">Download</span>
-    </span>
-  </p>
-  <span [hidden] = isHidden>
-    <br/>
-      <span class="icon-label">{{this.timeSlot.feedback.length}} Comment(s)</span>
-   <div *ngIf="!this.hasMadeComment()">
-    <ea-makecomment (madeComment)="getComment($event)" [timeSlotFeedback] = this.timeSlot.feedback>
-    </ea-makecomment>
-  </div>
-    <div class="singleComment" *ngFor="let feedback of this.timeSlot.feedback">
-      <div  *ngIf = "user.id == feedback.userId; else normalDisplay">  
-        <div class="star">
-          <star-rating-comp [starType]="'svg'" (onRatingChange)="updateOwnRating($event,feedback)"  rating="{{ feedback.rating }}" [staticColor]="'ok'" [size]="'medium'" ></star-rating-comp>
-        </div>
+    <p class="description mat-body-1" *ngIf="timeSlot.description">{{timeSlot.description}}</p>
+    <p class="presenter mat-body-1" *ngIf="presenters">{{presenters}}</p>
+    <p class="details">
+        <span class="event-detail hours" *ngIf="timeSlot.startTime && timeSlot.endTime">
+            <mat-icon>alarm</mat-icon>
+            <span class="icon-label">{{timeSlot.startTime}} - {{timeSlot.endTime}}</span>
+        </span>
+        <span class="event-detail room" *ngIf="timeSlot.room">
+            <mat-icon>home</mat-icon>
+            <span class="icon-label">{{timeSlot.room}}</span>
+        </span>
+        <span class="event-detail clickable" *ngIf="timeSlot.room" (click)="commentClick()">
+            <mat-icon>speaker_notes</mat-icon>
+            <span class="icon-label">{{this.timeSlot.feedback.length}} Comment(s)</span>
+        </span>
+        <span class="event-detail room clickable" *ngIf="timeSlot.room && timeSlot.downloadurl" (click)="downloadClick()">
+            <mat-icon>cloud_download</mat-icon>
+            <span class="icon-label">Download</span>
+        </span>
+    </p>
+    <span [hidden]="isHidden">
         <br/>
-          <div class ="center"><textarea autosize [minRows]="1" [maxRows]="15" rows="1" cols="50" [(ngModel)] = "feedback.comment"  ></textarea>
-          <br/> <input class="capbutton" type ="submit" name="Update Feedback" value="Update Feedback" (click)="update(feedback)"> 
-         <br> <input class="capdelete" type="submit" value="Delete" (click) = "deleteClick(feedback)">
-         
+        <span class="icon-label">{{this.timeSlot.feedback.length}} Comment(s)</span>
+        <div *ngIf="!hasMadeComment()">
+            <ea-makecomment (madeComment)="getComment($event)" [timeSlotFeedback]="timeSlot.feedback">
+            </ea-makecomment>
+        </div>
+        <div class="singleComment" *ngFor="let feedback of timeSlot.feedback">
+            <div *ngIf="user.id == feedback.userId; else normalDisplay" class="comment-display">
+                <div class="comment-display-heading">
+                    <div class="star" (click)="commentChanged()">
+                        <star-rating-comp [starType]="'svg'" rating="{{ feedback.rating }}" (onRatingChange)="updateOwnRating($event,feedback)"  [staticColor]="'ok'"
+                            [size]="'medium'"></star-rating-comp>
+                    </div>
+                    <div class="comment-display-heading-delete" (click)="deleteClick(feedback)">
+                        <mat-icon class="black-icon">delete</mat-icon>
+                    </div>
+                </div>
+                <div class="comment-display-body">
+                    <textarea autosize [minRows]="2" [maxRows]="15" rows="1" cols="50" (ngModelChange)="commentChanged($event)" [(ngModel)]="feedback.comment"></textarea>
+                    <input *ngIf="changedComment" class="capbutton" type="submit" name="Update Feedback" value="Update Feedback" (click)="update(feedback)">
+                </div>
+            </div>
 
+            <ng-template #normalDisplay>
+                <div class="star">
+                    <star-rating-comp [starType]="'svg'" [staticColor]="'ok'" [size]="'medium'" [readOnly]="'true'" rating="{{ feedback.rating }}"></star-rating-comp>
+                </div>
+                <br/>
+                <div class="comment-display-body">{{feedback.comment}}</div>
+                <div class="smallFont" *ngIf="feedback.minutes>=0">
+                    <br>{{feedback.minutes}} minute(s) ago
+                </div>
+                <div class="smallFont" *ngIf="feedback.hours>0">
+                    <br> {{feedback.hours}} Hour(s) ago
+                </div>
+                <div class="smallFont" *ngIf="feedback.days>0">
+                    <br> {{feedback.days}} day(s) ago
+                </div>
+                <div class="smallFont" *ngIf="feedback.years>0">
+                    <br> {{feedback.years}} year(s) ago
+                </div>
+
+            </ng-template>
 
         </div>
-      </div>
 
-      <ng-template #normalDisplay>
-        <div class="star">
-          <star-rating-comp [starType]="'svg'" [staticColor]="'ok'" [size]="'medium'" [readOnly]="'true'"  rating="{{ feedback.rating }}"></star-rating-comp>
-        </div>
-          <br/> <div class="center">{{feedback.comment}}</div> 
-      <div class="smallFont" *ngIf="feedback.minutes>=0">
-      <br>{{feedback.minutes}} minute(s) ago
-    </div>
-    <div class="smallFont" *ngIf="feedback.hours>0">
-      <br> {{feedback.hours}} Hour(s) ago
-    </div>
-    <div class="smallFont" *ngIf="feedback.days>0">
-        <br> {{feedback.days}} day(s) ago
-      </div>
-      <div class="smallFont" *ngIf="feedback.years>0">
-          <br> {{feedback.years}} year(s) ago
-        </div>
-      
-    </ng-template>  
-    
-  </div>
-
-  </span>
+    </span>
 </div>

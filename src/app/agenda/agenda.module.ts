@@ -12,7 +12,7 @@ import {StarRatingModule} from 'angular-star-rating';
 import {AutosizeModule} from 'ngx-autosize';
 import { PasswordService } from '../services/password.service';
 import { InputBoxComponent } from './input-box/input-box.component';
-import { NgxSmartModalModule } from 'ngx-smart-modal';
+
 
 
 
@@ -27,7 +27,7 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     FormsModule,
     SharedModule,
     AutosizeModule,
-    NgxSmartModalModule.forRoot() 
+    
   ],
   
   declarations: [DayComponent, AgendaComponent, TimeSlotComponent, MakecommentComponent,],

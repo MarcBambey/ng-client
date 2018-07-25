@@ -13,7 +13,6 @@ import {RequestInterceptor} from './agenda/interceptor/request.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {ResponseInterceptor} from './agenda/interceptor/response.interceptor';
 import { CommentService } from './services/comment.service';
-import { CommentComponent } from './agenda/comment/comment.component';
 import {UserService} from './services/user.service';
 import { AlertService } from './services/alert.service';
 import { AlertBoxComponent } from './agenda/alert-box/alert-box.component';
@@ -37,7 +36,7 @@ import { ConfirmationDialogComponent } from './agenda/confirmation-dialog/confir
     AlertBoxComponent,
     InputBoxComponent,
     ConfirmationDialogComponent,
-    //CommentComponent
+    
   ],
   imports: [
     HttpModule,
